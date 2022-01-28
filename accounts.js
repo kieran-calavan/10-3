@@ -10,7 +10,7 @@ function findAccountById(accounts, id) {
 // sort accounts in alphabetical order using sort method, making all objects lowercase
 // compare the last name of account A with the last name in account B
 function sortAccountsByLastName(accounts) {
-  accounts.sort((A, B) => A.name.last.toLowerCase() > B.name.last.toLowerCase() ? 1 : -1);
+  accounts.sort((accountA, accountB) => accountA.name.last.toLowerCase() > accountB.name.last.toLowerCase() ? 1 : -1);
   return accounts;
 }
 
