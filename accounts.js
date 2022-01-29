@@ -10,24 +10,26 @@ function findAccountById(accounts, id) {
 // sort accounts in alphabetical order using sort method, making all objects lowercase
 // compare the last name of account A with the last name in account B
 function sortAccountsByLastName(accounts) {
-  accounts.sort((accountA, accountB) => accountA.name.last.toLowerCase() > accountB.name.last.toLowerCase() ? 1 : -1);
+  accounts.sort((accountA,accountB) => accountA.name.last.toLowerCase() > accountB.name.last.toLowerCase() ? 1: -1);
   return accounts;
 }
+
 
 // loop through accounts id's
 // loop through borrowed books id's
 // check if the borrow id matches account id, return count
 // returned books borrowed = false
 function getTotalNumberOfBorrows(account, books) {
-  let result = 0;
-  for (let i = 0; i < books.length; i++) {
-    for (let k = 0; k < books[i].borrows.length; k++) {
-      if (books[i].borrows[k].id == account.id) {
-        result++
-      }
-    }
-  }
-  return result
+  const { id: accId } = account;
+
+  return books.reduce((accumulator, book) => {
+    return (
+      accumulator +
+      book.borrows
+        .filter(borrow => borrow.id === accId)
+        .reduce((accumulatorBorrows, borrow) => accumulatorBorrows + 1, 0)
+    );
+  }, 0);
 }
 
 // get the accounts that have borrowed each book
